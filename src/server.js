@@ -1,28 +1,21 @@
 //import express
-const express = require('express')
-const path = require('path');
-
 require('dotenv').config()
+const express = require('express')
+const configViewEngine = require('./config/viewEngine')
 // console.log("check env: ",process.env)
+
+const webRoute = require('./routes/web')
 // app express
 const app = express()
 //port
-const port = process.env.PORT || 8888
+const port = process.env.PORT || 3000
 const hostname = process.env.HOST_NAME
 
 // config template engine
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs')
+configViewEngine(app)
 
-// khai bao route
-app.get('/', (req, res) => {-
-  res.send('Hello World!')
-})
+app.use('/test',webRoute)
 
-app.get('/abc', (req, res) => {
-    // res.send('check ABC!')
-    res.render('sample.ejs')
-  })
 
 // khoi chay server
 app.listen(port,hostname, () => {
