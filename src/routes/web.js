@@ -1,16 +1,11 @@
 // khai bao route
 const express = require('express')
-
+const { getHomepage, getABC } = require('../controllers/homeController')
 const router = express.Router()
 
-
-router.get('/', (req, res) => {-
-    res.send('Hello World nodemon!')
-  })
+// router.Method('/route',handler)
+router.get('/', getHomepage)
   
-router.get('/abc', (req, res) => {
-      // res.send('check ABC!')
-    res.render('sample.ejs')
-})
+router.get('/abc', getABC)
 
 module.exports = router

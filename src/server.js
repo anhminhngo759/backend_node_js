@@ -14,10 +14,10 @@ const hostname = process.env.HOST_NAME
 // config template engine
 configViewEngine(app)
 
-app.use('/test',webRoute)
+app.use('/', webRoute)
 
 
 // khoi chay server
-app.listen(port,hostname, () => {
+app.listen(port, hostname, () => {
   console.log(`Example app listening on port ${port}`)
 })
