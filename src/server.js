@@ -5,6 +5,8 @@ const configViewEngine = require('./config/viewEngine')
 // console.log("check env: ",process.env)
 
 const webRoute = require('./routes/web')
+const connection = require('./config/database')
+
 // app express
 const app = express()
 //port
@@ -15,6 +17,11 @@ const hostname = process.env.HOST_NAME
 configViewEngine(app)
 
 app.use('/', webRoute)
+
+
+
+// simple query
+
 
 
 // khoi chay server
