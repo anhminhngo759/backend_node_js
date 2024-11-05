@@ -13,15 +13,14 @@ const app = express()
 const port = process.env.PORT || 3000
 const hostname = process.env.HOST_NAME
 
+//config req.body
+app.use(express.json()) // for json
+app.use(express.urlencoded({ extended: true })) 
+
 // config template engine
 configViewEngine(app)
 
 app.use('/', webRoute)
-
-
-
-// simple query
-
 
 
 // khoi chay server

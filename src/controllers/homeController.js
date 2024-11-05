@@ -1,25 +1,34 @@
 const connection = require('../config/database')
 const getHomepage = (req, res) => {
-    //process data
-    //call model
-    let model = []
-    connection.query(
-        'select * from Users u',
-        function (err, results, fields) {
-            users = results
-            console.log(">>>results= ", results); // results contains rows returned by server
-            // console.log(">>> fields= ", fields); // fields contains extra meta data about results, if available
-            res.send(JSON.stringify(users))
-        }
-    );
-
-
+    return res.render('home.ejs')
 }
 
 const getABC = (req, res) => {
     res.render('sample.ejs')
 }
 
+const postCreateUser = (req, res) => {
+    // console.log(">>> req.body: ", req.body)
+    let email = req.body.email
+    let name = req.body.myname
+    let city = req.body.city
+    
+    // console.log(">>> email= ", email, 'name = ', name, 'city = ', city)
+    // res.send('create new user')
+
+    connection.query(
+        `INSERT INTO 
+        Users (email, name, city)
+        VALUES (?, ?, ?);`,
+        [email, name, city],
+        function(err, results) {
+          console.log(results);
+          res.send(' Created user succeed !')
+        }
+    )
+}
+
 module.exports = {
-    getHomepage, getABC
+    getHomepage, getABC,
+    postCreateUser
 }
