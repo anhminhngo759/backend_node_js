@@ -15,15 +15,21 @@ const hostname = process.env.HOST_NAME
 
 //config req.body
 app.use(express.json()) // for json
-app.use(express.urlencoded({ extended: true })) 
+app.use(express.urlencoded({ extended: true }))
 
 // config template engine
 configViewEngine(app)
 
-app.use('/', webRoute)
+app.use('/', webRoute);
 
-
+(async () => {
+  try {
+    await connection()
+    app.listen(port, hostname, () => {
+      console.log(`Backend app listening on port ${port}`)
+    })
+  } catch (error) {
+    console.log(">>> Error connect to DB: ", error)
+  }
+})()
 // khoi chay server
-app.listen(port, hostname, () => {
-  console.log(`Example app listening on port ${port}`)
-})
