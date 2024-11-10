@@ -3,13 +3,10 @@ const express = require('express')
 
 const routerAPI = express.Router()
 
-const {getUsersAPI, } = require('../controllers/apiController')
-
-// router.Method('/route',handler)
-routerAPI.get('/', (req,res) => {
-    res.send(" hello world")
-})
+const { getUsersAPI, postCreateUserAPI } = require('../controllers/apiController')
 
 routerAPI.get('/users', getUsersAPI)
+
+routerAPI.post('/users', postCreateUserAPI)
 
 module.exports = routerAPI
