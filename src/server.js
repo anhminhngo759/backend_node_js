@@ -2,11 +2,10 @@
 require('dotenv').config()
 const express = require('express')
 const configViewEngine = require('./config/viewEngine')
-// console.log("check env: ",process.env)
-
 const webRoute = require('./routes/web')
-const connection = require('./config/database')
+const apiRoute = require('./routes/api')
 
+const connection = require('./config/database')
 
 // app express
 const app = express()
@@ -22,6 +21,8 @@ app.use(express.urlencoded({ extended: true }))
 configViewEngine(app)
 
 app.use('/', webRoute);
+app.use('/v1/api/', apiRoute);
+
 
 (async () => {
   try {

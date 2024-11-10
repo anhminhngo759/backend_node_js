@@ -5,7 +5,6 @@ const { getAllUsers, getUserById,
 const User = require("../models/user")
 
 const getHomepage = async (req, res) => {
-    // console.log(" >>> result: ", results)
     let results = await User.find({})
     return res.render('home.ejs', { listUsers: results })
 }
