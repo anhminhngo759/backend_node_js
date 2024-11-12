@@ -5,6 +5,7 @@ const methodOverride = require('method-override');
 const configViewEngine = require('./config/viewEngine')
 const webRoute = require('./routes/web')
 const apiRoute = require('./routes/api')
+const fileUpload = require('express-fileupload');
 
 const connection = require('./config/database')
 
@@ -13,6 +14,10 @@ const app = express()
 //port
 const port = process.env.PORT || 3000
 const hostname = process.env.HOST_NAME
+
+//config file upload
+// default options
+app.use(fileUpload());
 
 // Sử dụng methodOverride để hỗ trợ PUT và DELETE
 app.use(methodOverride('_method'));
