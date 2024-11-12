@@ -14,7 +14,7 @@
 
         </div>
         <div class="form-add-new">
-            <form action="/delete-user" method="post">
+            <form action="/delete-user?_method=DELETE" method="post">
                 <fieldset>
                     <legend>Delete user</legend>
                     <div class="input-group d-none">
@@ -25,13 +25,13 @@
                             value="<%= userEdit.id %>" />
                     </div>
                     <div class="input-group">
-                        <label>Are you sure to delete this user with Email: </label>
+                        <label>Are you sure to delete this user with Email:
+                        </label>
                         <input
                             type="text"
                             name="email"
                             value="<%= userEdit.email %>" />
                     </div>
-                    
 
                     <div>
                         <button class="bt">Confirm</button>
