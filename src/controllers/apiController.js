@@ -1,5 +1,5 @@
 const User = require("../models/user")
-const { uploadSingleFile } = require("../services/fileService");
+const { uploadSingleFile, uploadMultipleFiles } = require("../services/fileService");
 
 const getUsersAPI = async (req, res) => {
     // console.log(" >>> result: ", results)
@@ -63,8 +63,8 @@ const deleteUserAPI = async (req, res) => {
 }
 
 const postUploadSingleFileApi = async (req, res) => {
-    // console.log("req.files =", req.files)
-
+    console.log("req.files =", req.files)
+    console.log("req.files =", req.files.image)
     if (!req.files || Object.keys(req.files).length === 0) {
         res.status(400).send('No files were uploaded.');
         return;
@@ -73,11 +73,41 @@ const postUploadSingleFileApi = async (req, res) => {
     let result = await uploadSingleFile(req.files.image)
     console.log(">>> check result: ", result)
 
-    return res.send("ok send")
+    // return res.send("ok send")
+
+    return res.status(200).json(
+        {
+            EC: 0,
+            data: result
+        }
+    )
+}
+
+const postUploadMultipleFileApi = async (req, res) => {
+    if (!req.files || Object.keys(req.files).length === 0) {
+        res.status(400).send('No files were uploaded.');
+        return;
+    }
+
+    console.log(req.files);
+    //upload single => files is an object
+    //upload multiple => files is an array
+    if (Array.isArray(req.files.image)) {
+        //upload multiple
+        let result = await uploadMultipleFiles(req.files.image);
+        return res.status(200).json({
+            EC: 0,
+            data: result
+        })
+
+    } else {
+        //upload single
+        return await postUploadSingleFileApi(req, res);
+    }
 }
 
 module.exports = {
     getUsersAPI, postCreateUserAPI,
     putUpdateUserAPI, deleteUserAPI,
-    postUploadSingleFileApi
+    postUploadSingleFileApi, postUploadMultipleFileApi
 }
