@@ -47,7 +47,7 @@ const updateCustomerService = async (id, name, address, email) => {
         let result = await Customer.updateOne({ _id: id }, { name, address, email })
         console.log(">>> check result :", result)
         return result
-        
+
     } catch (error) {
         console.log(">>> check error:", error)
         return null
@@ -66,8 +66,20 @@ const deleteACustomerService = async (id) => {
     }
 }
 
+const deleteArrayCustomerService = async (arrIds) => {
+    try {
+        let result = await Customer.delete({ _id: { $in: arrIds } })
+        console.log(">>> check result :", result)
+        return result
+
+    } catch (error) {
+        console.log(">>> check error:", error)
+        return null
+    }
+}
+
 module.exports = {
     createCustomerService, createArrayCustomerService,
     getAllCustomerService, updateCustomerService,
-    deleteACustomerService
+    deleteACustomerService, deleteArrayCustomerService
 }
