@@ -9,7 +9,7 @@ const { getUsersAPI, postCreateUserAPI,
 } = require('../controllers/apiController')
 
 const { postCreateCustomer, postCreateArrayCustomer,
-    getAllCustomers, putUpdateCustomers, 
+    getAllCustomers, putUpdateCustomers,
     deleteACustomer, deleteArrayCustomer } = require('../controllers/customerController')
 
 routerAPI.get('/users', getUsersAPI)
@@ -27,14 +27,14 @@ routerAPI.put('/customers', putUpdateCustomers)
 routerAPI.delete('/customers', deleteACustomer)
 routerAPI.delete('/customers-many', deleteArrayCustomer)
 
-routerAPI.get('/info', (req,res) => {
+routerAPI.get('/info', (req, res) => {
     console.log(">>> check query: ", req.query)
     return res.status(200).json({
         data: req.query
     })
 })
 
-routerAPI.get('/info/:name/:address', (req,res) => {
+routerAPI.get('/info/:name/:address', (req, res) => {
     console.log(">>> check params: ", req.params)
     return res.status(200).json({
         data: req.params

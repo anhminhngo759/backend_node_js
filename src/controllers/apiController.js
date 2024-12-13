@@ -16,12 +16,16 @@ const getUsersAPI = async (req, res) => {
 const postCreateUserAPI = async (req, res) => {
     let email = req.body.email
     let name = req.body.myname
-    let city = req.body.city
+    let phone = req.body.phone
+    let address = req.body.address
+    let role = req.body.role
 
     let user = await User.create({
         email: email,
         name: name,
-        city: city
+        phone: phone,
+        address : address,
+        role : role
     })
 
     return res.status(200).json(

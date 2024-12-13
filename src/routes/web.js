@@ -3,12 +3,18 @@ const express = require('express')
 const { getHomepage, getABC, postCreateUser,
     getCreatePage, getUpdatePage,
     postUpdateUser, postDeleteUser,
-    postHandleRemoveUser
+    postHandleRemoveUser, getPageRegister,
+    getPageAboutUs
 } = require('../controllers/homeController')
+
+
+
 const router = express.Router()
 
 // router.Method('/route',handler)
 router.get('/', getHomepage)
+router.get('/users/register', getPageRegister)
+router.get('/about-us', getPageAboutUs)
 router.get('/abc', getABC)
 
 router.get('/create', getCreatePage)
