@@ -315,7 +315,7 @@
                                 <li class="dropdown"><a href="javascript:void(0)">Categories</a>
                                     
                                     <ul class="sub-menu">
-                                        <% listProduct.forEach(function (category, index) { %>
+                                        <% categories.forEach(function (category, index) { %>
                                         <li class="dropdown position-static">
                                             <a data-category-id="<%= category._id %>"
                                             href="javascript:void(0)"><%= category.name %>
@@ -3879,7 +3879,7 @@
                                                 data-bs-target="#ec_quickview_modal">
                                                 <img src="/images/icons/quickview.svg"
                                                     class="svg_img pro_svg" alt="" /></a> -->
-                                                <a href="#ec_quickview_modal" 
+                                                <!-- <a href="#ec_quickview_modal" 
                                                 class="quickview" 
                                                 title="Quick view" 
                                                 data-bs-toggle="modal"
@@ -3891,7 +3891,14 @@
                                                 data-product-old-price="<%= product.oldPrice || product.price %>"
                                                 data-product-images='<%= JSON.stringify(product.images) %>'>
                                                  <img src="/images/icons/quickview.svg" class="svg_img pro_svg" alt="" />
+                                             </a> -->
+                                             <a href="#quickview-modal-<%= product._id %>" 
+                                                class="quickview" 
+                                                data-bs-toggle="modal" 
+                                                title="Quick view">
+                                                 <img src="/images/icons/quickview.svg" class="svg_img pro_svg" alt="" />
                                              </a>
+
                                                 <button title="Add To Cart" class="add-to-cart">
                                                     <img src="/images/icons/cart.svg" class="svg_img pro_svg" alt="" />
                                                     Add To Cart
@@ -4344,17 +4351,66 @@
             </div>
         </div>
     </div> -->
+    
+    <% listProduct.forEach(function (category) { %>
+        <% if (category.product && Array.isArray(category.product)) { %>
+            <% category.product.forEach(function (product) { %>
+                <div class="modal fade" id="quickview-modal-<%= product._id %>" tabindex="-1" role="dialog">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <button type="button" class="btn-close qty_close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            <div class="modal-body">
+                
+                                        <div class="row">
+                                            <div class="col-md-5 col-sm-12 col-xs-12">
+                                                <!-- Hình ảnh -->
+                                                <div class="qty-product-cover">
+                                                    <% product.images.forEach(function (image) { %>
+                                                        <div class="qty-slide">
+                                                            <img class="img-responsive" src="<%= image %>" alt="">
+                                                        </div>
+                                                    <% }) %>
+                                                </div>
+                                                <!-- Hình ảnh thu nhỏ -->
+                                                <div class="qty-nav-thumb">
+                                                    <% product.images.forEach(function (image) { %>
+                                                        <div class="qty-slide">
+                                                            <img class="img-responsive" src="<%= image %>" alt="">
+                                                        </div>
+                                                    <% }) %>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-7 col-sm-12 col-xs-12">
+                                                <div class="quickview-pro-content">
+                                                    <h5 class="ec-quick-title"><%= product.name %></h5>
+                                                    <div class="ec-quickview-desc"><%= product.description %></div>
+                                                    <div class="ec-quickview-price">
+                                                        <span class="old-price">$<%= product.price %></span>
+                                                        <span class="new-price">$<%= product.price %></span>
+                                                    </div>
+                                                    <button class="btn btn-primary">Add to Cart</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <% }); %>
+        <% } %>
+    <% }); %>
 
-    <div class="modal fade" id="ec_quickview_modal" tabindex="-1" role="dialog">
+    <!-- <div class="modal fade" id="ec_quickview_modal" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <button type="button" class="btn-close qty_close" data-bs-dismiss="modal" aria-label="Close"></button>
                 <div class="modal-body">
                     <div class="row" id="quickview-content">
                         <div class="col-md-5 col-sm-12 col-xs-12">
-                            <!-- Swiper -->
+                          
                             <div class="qty-product-cover">
-                                <!-- Hình ảnh chính sẽ được thêm động ở đây -->
+                            
                             </div>
                             <div class="qty-nav-thumb">
                                
@@ -4392,7 +4448,7 @@
             </div>
         </div>
     </div>
-    
+     -->
     
     <!-- Modal end -->
 

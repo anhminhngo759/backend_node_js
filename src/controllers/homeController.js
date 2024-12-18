@@ -3,11 +3,12 @@ const { getAllUsers, getUserById,
     updateUserById, deleteUserById } = require('../services/CRUDService')
 
 const { getAllHomeService, getProductByCategoryService } = require('../services/homeService')
-
 const User = require("../models/user")
 const Customer = require("../models/customer")
 const Category = require("../models/categories")
 const Product = require("../models/products")
+
+
 // const getHomepage = async (req, res) => {
 //     let results = await Customer.find({})
 //     return res.render('index.ejs', { listCustomer: results })
@@ -32,7 +33,6 @@ const getHomepage = async (req, res) => {
     }
 
 }
-
 
 // getHomepage()
 
