@@ -3,7 +3,7 @@ require('dotenv').config()
 const express = require('express')
 const methodOverride = require('method-override');
 const configViewEngine = require('./config/viewEngine')
-const webRoute = require('./routes/web')
+const indexRoute = require('./routes/index')
 const apiRoute = require('./routes/api')
 const fileUpload = require('express-fileupload');
 
@@ -51,7 +51,7 @@ app.use(async (req, res, next) => {
   next();
 });
 
-app.use('/', webRoute);
+app.use('/', indexRoute);
 app.use('/v1/api/', apiRoute);
 
 

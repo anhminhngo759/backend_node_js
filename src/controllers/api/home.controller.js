@@ -1,12 +1,12 @@
 // const connection = require('../config/database')
 const { getAllUsers, getUserById,
-    updateUserById, deleteUserById } = require('../services/CRUDService')
+    updateUserById, deleteUserById } = require('../../services/CRUDService')
 
-const { getAllHomeService, getProductByCategoryService } = require('../services/homeService')
-const User = require("../models/user")
-const Customer = require("../models/customer")
-const Category = require("../models/categories")
-const Product = require("../models/products")
+const { getAllHomeService, getProductByCategoryService } = require('../../services/homeService')
+const User = require("../../models/account.model")
+// const Customer = require("../../models/customer")
+// const Category = require("../../models/categories")
+// const Product = require("../../models/products")
 
 
 // const getHomepage = async (req, res) => {
@@ -23,9 +23,9 @@ const getHomepage = async (req, res) => {
     if (limit && page) {
         result = await getAllHomeService(limit, page)
         re = await getProductByCategoryService(limit, page)
-        console.log(">>> result: ", result)
-        console.log(">>> re: ", re)
-        
+        // console.log(">>> result: ", result)
+        console.log(">>> get product by category : ", re)
+
         return res.render('index.ejs', { listCustomer: result, listProduct: re })
     } else {
         result = await getAllHomeService()
@@ -44,6 +44,9 @@ const getPageAboutUs = (req, res) => {
     res.render('pages/about-us.ejs')
 }
 
+// const getProductDetail = (req, res) => {
+//     res.render('product/product-detail.ejs')
+// }
 
 const getABC = (req, res) => {
     res.render('sample.ejs')

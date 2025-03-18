@@ -143,7 +143,7 @@
                         <!-- Ec Header Logo Start -->
                         <div class="align-self-center">
                             <div class="header-logo">
-                                <a href="index.html"><img src="/images/logo/logo.png" alt="Site Logo" /><img
+                                <a href="/"><img src="/images/logo/logo.png" alt="Site Logo" /><img
                                         class="dark-logo" src="/images/logo/dark-logo.png" alt="Site Logo"
                                         style="display: none;" /></a>
                             </div>
@@ -171,7 +171,7 @@
                                     <button class="dropdown-toggle" data-bs-toggle="dropdown"><img
                                             src="/images/icons/user.svg" class="svg_img header_svg" alt="" /></button>
                                     <ul class="dropdown-menu dropdown-menu-right">
-                                        <li><a class="dropdown-item" href="/users/register">Register1</a></li>
+                                        <li><a class="dropdown-item" href="/auth/register">Register1</a></li>
                                         <li><a class="dropdown-item" href="checkout.html">Checkout</a></li>
                                         <li><a class="dropdown-item" href="login.html">Login</a></li>
                                     </ul>
@@ -206,7 +206,7 @@
                     <!-- Ec Header Logo Start -->
                     <div class="col">
                         <div class="header-logo">
-                            <a href="index.html"><img src="/images/logo/logo.png" alt="Site Logo" /><img
+                            <a href="/"><img src="/images/logo/logo.png" alt="Site Logo" /><img
                                     class="dark-logo" src="/images/logo/dark-logo.png" alt="Site Logo"
                                     style="display: none;" /></a>
                         </div>
@@ -326,7 +326,7 @@
                                                     <% category.product.forEach(function (product) { %>
                                                     <li>
                                                         <a data-id="<%= product._id %>"
-                                                         href="product-left-sidebar.html"><%= product.name %></a>
+                                                         href="/products/<%= product._id %>"><%= product.name %></a>
                                                     </li>
                                                     <% }); %>
                                                 
@@ -339,38 +339,7 @@
                                                 <% } %>
                                         </li>
                                         <% }); %>
-                                        <!-- <li class="dropdown position-static"><a href="javascript:void(0)">Product 360
-                                                <i class="ecicon eci-angle-right"></i></a>
-                                            <ul class="sub-menu sub-menu-child">
-                                                <li><a href="product-360-left-sidebar.html">360 left sidebar</a></li>
-                                                <li><a href="product-360-right-sidebar.html">360 right sidebar</a></li>
-                                            </ul>
-                                        </li>
-                                        <li class="dropdown position-static"><a href="javascript:void(0)">Product video
-                                                <i class="ecicon eci-angle-right"></i></a>
-                                            <ul class="sub-menu sub-menu-child">
-                                                <li><a href="product-video-left-sidebar.html">Video left sidebar</a>
-                                                </li>
-                                                <li><a href="product-video-right-sidebar.html">Video right sidebar</a>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        <li class="dropdown position-static"><a href="javascript:void(0)">Product
-                                                gallery
-                                                <i class="ecicon eci-angle-right"></i></a>
-                                            <ul class="sub-menu sub-menu-child">
-                                                <li><a href="product-gallery-left-sidebar.html">Gallery left sidebar</a>
-                                                </li>
-                                                <li><a href="product-gallery-right-sidebar.html">Gallery right
-                                                        sidebar</a></li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="product-full-width.html">Product full width</a></li>
-                                        <li><a href="product-360-full-width.html">360 full width</a></li>
-                                        <li><a href="product-video-full-width.html">Video full width</a></li>
-                                        <li><a href="product-gallery-full-width.html">Gallery full width</a></li> -->
-                                    </ul>
-                                   
+                                    </ul> 
                                 </li>
                                 <li class="dropdown"><a href="/about-us">About Us</a></li>
                                 <li class="dropdown"><a href="javascript:void(0)">Pages</a>
@@ -526,90 +495,31 @@
             <div class="ec-menu-inner">
                 <div class="ec-menu-content">
                     <ul>
-                        <li><a href="index.html">Home</a></li>
+                        <li><a href="/">Home</a></li>
+                    
                         <li><a href="javascript:void(0)">Categories</a>
                             <ul class="sub-menu">
-                                <li>
-                                    <a href="javascript:void(0)">Classic Variation</a>
+                                <% categories.forEach(function (category, index) { %>
+                                <li><a data-category-id="<%= category._id %>"
+                                    href="javascript:void(0)"><%= category.name %></a>
+                                    <% if (category.product && Array.isArray(category.product)) { %>
                                     <ul class="sub-menu">
-                                        <li><a href="shop-left-sidebar-col-3.html">Left sidebar 3 column</a></li>
-                                        <li><a href="shop-left-sidebar-col-4.html">Left sidebar 4 column</a></li>
-                                        <li><a href="shop-right-sidebar-col-3.html">Right sidebar 3 column</a></li>
-                                        <li><a href="shop-right-sidebar-col-4.html">Right sidebar 4 column</a></li>
-                                        <li><a href="shop-full-width.html">Full width 4 column</a></li>
+                                        <% category.product.forEach(function (product) { %>
+                                            <li><a data-id="<%= product._id %>" 
+                                                href="product-left-sidebar.html"><%= product.name %></a></li>
+                                            
+                                        <% }); %>
                                     </ul>
+                                    <% } else { %>
+                                        <ul class="sub-menu">
+                                            <li><a href="javascript:void(0)">No products available</a></li>
+                                        </ul>
+                                    <% } %>
                                 </li>
-                                <li>
-                                    <a href="javascript:void(0)">Classic Variation</a>
-                                    <ul class="sub-menu">
-                                        <li><a href="shop-banner-left-sidebar-col-3.html">Banner left sidebar 3
-                                                column</a></li>
-                                        <li><a href="shop-banner-left-sidebar-col-4.html">Banner left sidebar 4
-                                                column</a></li>
-                                        <li><a href="shop-banner-right-sidebar-col-3.html">Banner right sidebar 3
-                                                column</a></li>
-                                        <li><a href="shop-banner-right-sidebar-col-4.html">Banner right sidebar 4
-                                                column</a></li>
-                                        <li><a href="shop-banner-full-width.html">Banner Full width 4 column</a></li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0)">Columns Variation</a>
-                                    <ul class="sub-menu">
-                                        <li><a href="shop-full-width-col-3.html">3 Columns full width</a></li>
-                                        <li><a href="shop-full-width-col-4.html">4 Columns full width</a></li>
-                                        <li><a href="shop-full-width-col-5.html">5 Columns full width</a></li>
-                                        <li><a href="shop-full-width-col-6.html">6 Columns full width</a></li>
-                                        <li><a href="shop-banner-full-width-col-3.html">Banner 3 Columns</a></li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0)">List Variation</a>
-                                    <ul class="sub-menu">
-                                        <li><a href="shop-list-left-sidebar.html">Shop left sidebar</a></li>
-                                        <li><a href="shop-list-right-sidebar.html">Shop right sidebar</a></li>
-                                        <li><a href="shop-list-banner-left-sidebar.html">Banner left sidebar</a></li>
-                                        <li><a href="shop-list-banner-right-sidebar.html">Banner right sidebar</a></li>
-                                        <li><a href="shop-list-full-col-2.html">Full width 2 columns</a></li>
-                                    </ul>
-                                </li>
-                                <li><a class="p-0" href="shop-left-sidebar-col-3.html"><img class="img-responsive"
-                                            src="/images/menu-banner/1.jpg" alt=""></a>
-                                </li>
+                                <% }); %>
                             </ul>
                         </li>
-                        <li><a href="javascript:void(0)">Products</a>
-                            <ul class="sub-menu">
-                                <li><a href="javascript:void(0)">Product page</a>
-                                    <ul class="sub-menu">
-                                        <li><a href="product-left-sidebar.html">Product left sidebar</a></li>
-                                        <li><a href="product-right-sidebar.html">Product right sidebar</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="javascript:void(0)">Product 360</a>
-                                    <ul class="sub-menu">
-                                        <li><a href="product-360-left-sidebar.html">360 left sidebar</a></li>
-                                        <li><a href="product-360-right-sidebar.html">360 right sidebar</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="javascript:void(0)">Product vodeo</a>
-                                    <ul class="sub-menu">
-                                        <li><a href="product-video-left-sidebar.html">vodeo left sidebar</a></li>
-                                        <li><a href="product-video-right-sidebar.html">vodeo right sidebar</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="javascript:void(0)">Product gallery</a>
-                                    <ul class="sub-menu">
-                                        <li><a href="product-gallery-left-sidebar.html">Gallery left sidebar</a></li>
-                                        <li><a href="product-gallery-right-sidebar.html">Gallery right sidebar</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="product-full-width.html">Product full width</a></li>
-                                <li><a href="product-360-full-width.html">360 full width</a></li>
-                                <li><a href="product-video-full-width.html">Video full width</a></li>
-                                <li><a href="product-gallery-full-width.html">Gallery full width</a></li>
-                            </ul>
-                        </li>
+                        <li class="dropdown"><a href="/about-us">About Us</a></li>
                         <li><a href="javascript:void(0)">Others</a>
                             <ul class="sub-menu">
                                 <li><a href="javascript:void(0)">Mail Confirmation</a>
@@ -3911,7 +3821,7 @@
                                     </div>
                                     <div class="ec-pro-content">
                                         <h5 class="ec-pro-title">
-                                            <a href="product-left-sidebar.html">
+                                            <a href="/products/<%= product._id %>">
                                                 <%= product.name %>
                                             </a>
                                         </h5>
@@ -4144,7 +4054,7 @@
                                 <h4 class="ec-footer-heading">Information</h4>
                                 <div class="ec-footer-links">
                                     <ul class="align-items-center">
-                                        <li class="ec-footer-link"><a href="about-us.html">About us</a></li>
+                                        <li class="ec-footer-link"><a href="/about-us">About us</a></li>
                                         <li class="ec-footer-link"><a href="faq.html">FAQ</a></li>
                                         <li class="ec-footer-link"><a href="track-order.html">Delivery Information</a></li>
                                         <li class="ec-footer-link"><a href="contact-us.html">Contact us</a></li>
@@ -4490,7 +4400,7 @@
                             class="ec-cart-noti ec-header-count cart-count-lable">3</span></a>
                 </div>
                 <div class="ec-nav-panel-icons">
-                    <a href="index.html" class="ec-header-btn"><img src="/images/icons/home.svg"
+                    <a href="/" class="ec-header-btn"><img src="/images/icons/home.svg"
                             class="svg_img header_svg" alt="icon" /></a>
                 </div>
                 <div class="ec-nav-panel-icons">
@@ -4728,6 +4638,7 @@
 
     <!-- Vendor JS -->
     <script src="/js/vendor/jquery-3.5.1.min.js"></script>
+    <script src="/js/vendor/jquery.validate.min.js"></script>
     <script src="/js/vendor/popper.min.js"></script>
     <script src="/js/vendor/bootstrap.min.js"></script>
     <script src="/js/vendor/jquery-migrate-3.3.0.min.js"></script>

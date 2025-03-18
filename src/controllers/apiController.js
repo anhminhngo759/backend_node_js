@@ -1,4 +1,4 @@
-const User = require("../models/user")
+const User = require("../models/account.model")
 const { uploadSingleFile, uploadMultipleFiles } = require("../services/fileService");
 
 const getUsersAPI = async (req, res) => {
@@ -24,8 +24,8 @@ const postCreateUserAPI = async (req, res) => {
         email: email,
         name: name,
         phone: phone,
-        address : address,
-        role : role
+        address: address,
+        role: role
     })
 
     return res.status(200).json(
