@@ -42,7 +42,7 @@ module.exports = {
 
             return res.status(200).json({
                 EC: 0,
-                message: "Category got successfully",
+                message: "Category updated successfully",
                 data: updatedcategory
             });
 

@@ -1,16 +1,10 @@
-// khai bao route
 const express = require('express')
-
-const { getPageRegister } = require('../controllers/api/home.controller')
-
-const { handleUserRegistration, handleCheckEmailExists } = require('../controllers/auth/auth.controller')
-
 const router = express.Router()
 
-router.get('/register', getPageRegister)
+const { register, login } = require('../controllers/auth/auth.controller')
 
-router.post('/register', handleUserRegistration)
+router.route('register').post(register);
 
-router.post('/check-email', handleCheckEmailExists )
+router.route('login').post(login);
 
-export default authRoute
+module.exports = router;

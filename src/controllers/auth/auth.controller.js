@@ -1,58 +1,58 @@
-// const { userRegistrationService } = require('../../services/registrationService')
-
-// const handleUserRegistration = async (req, res) => {
-//     console.log(">>> req.body: ", req.body)
-//     let email = req.body.email
-//     let name = req.body.name
-//     let phone = req.body.phone
-//     let address = req.body.address
-
-//     let result = await userRegistrationService(email, name, phone, address)
-//     console.log(">>> result_register: ", result)
-
-//     res.redirect('/')
-// }
-
-
-// module.exports = {
-//     handleUserRegistration
-// }
-
-const { userRegistrationService, checkEmailExists } = require('../../services/registrationService');
-
-const handleUserRegistration = async (req, res) => {
-    try {
-        const { email, name, phone, address, password } = req.body;
-
-        // Nếu email chưa tồn tại, thực hiện đăng ký người dùng
-        const result = await userRegistrationService(email, name, phone, address, password);
-        console.log("Registration :", result)
-        
-        if (result.success) {
-            // return res.json({ success: true, message: 'Registration successful!' }); // Đăng ký thành công
-            res.redirect('/'); // Đăng ký thành công
-        } 
-        else {
-            return res.json({ success: false, message: result.message });
-            // res.render('register', { errorMessage: result.message }); // Gửi lỗi ra view
-        }
-    } catch (error) {
-        console.error(">>> Registration error: ", error);
-    }
-};
-
-const handleCheckEmailExists = async (req, res) => {
-    const { email } = req.body;
-    console.log("req.body: ",req.body)
-    try {
-        const result = await checkEmailExists(email);
-        console.log("result check email : ", result) 
-        return res.json(result);
-    } catch (error) {
-        console.error('Error checking email:', error);
-    }
-};
+const accountModel = require('../../models/account.model')
+const bcryptjs = require('bcrypt');
 
 module.exports = {
-    handleUserRegistration, handleCheckEmailExists
-};
+    register: async (req, res) => {
+        try {
+            const { username, ...body } = req.body;
+            // console.log(username)
+            // console.log(body)
+
+            const account = await accountModel.findOne({ username });
+
+            if (account) {
+                return res.status(400).json({ EC: 1, message: " User already exists " });
+            }
+
+            const newAccount = await accountModel.create({ username, ...body });
+            return res.status(201).json({
+                EC: 0,
+                message: " Register successfully",
+                data: newAccount
+            });
+
+        } catch (error) {
+            console.error(">>> check error:", error);
+            return res.status(500).json({ EC: 1, message: "Server error" });
+        }
+
+    },
+    login: async (req, res) => {
+        try {
+            const { username, password } = req.body;
+
+            const account = await accountModel.findOne({ username });
+            console.log("account : ", account)
+
+            // kiểm tra username có tồn tại hay không
+            if (!account) {
+                return res.status(400).json({ EC: 1, message: " Incorrect username or password1" });
+            }
+
+            // Kiểm tra mật khẩu
+            if (!bcryptjs.compareSync(password, account.password)) {
+                return res.status(400).json({ EC: 1, message: " Incorrect password2" });
+            }
+
+            return res.status(200).json({
+                EC: 0,
+                message: " Login successfully",
+                data: account
+            });
+
+        } catch (error) {
+            console.error(">>> check error:", error);
+            return res.status(500).json({ EC: 1, message: "Server error" });
+        }
+    }
+}
