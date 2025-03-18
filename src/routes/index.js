@@ -6,7 +6,7 @@ const authRoute = require('./auth.route')
 
 const router = express.Router()
 
-router.use('/category', categoryRoute);
+router.use('/categories', categoryRoute);
 
 router.use('/products', productRoute)
 

@@ -44,7 +44,7 @@ module.exports = {
                 EC: 0,
                 message: "Category got successfully",
                 data: updatedcategory
-            })
+            });
 
         } catch (error) {
             console.error(">>> check error:", error);
@@ -61,7 +61,7 @@ module.exports = {
                 EC: 0,
                 message: "Category deleted successfully",
                 data: deletedCategory
-            })
+            });
 
         } catch (error) {
             console.error(">>> check error:", error);
