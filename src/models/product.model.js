@@ -5,13 +5,21 @@ const productSchema = mongoose.Schema({
         type: String,
         required: true,
     },
-    img: {
+    description: {
+        type: String,
+    },
+    image: [{
         type: String,
         required: true,
-    },
+    }],
     price: {
         type: Number,
         required: true,
+        min: 0
+    },
+    stock: {
+        type: Number,
+        min: 0
     },
     category_id: {
         type: mongoose.SchemaTypes.ObjectId,
@@ -22,4 +30,4 @@ const productSchema = mongoose.Schema({
     timestamps: true,
 });
 
-module.exports = mongoose.model('product',productSchema)
+module.exports = mongoose.model('product', productSchema)

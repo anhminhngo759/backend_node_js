@@ -1,4 +1,6 @@
-const express = require('express')
+const express = require("express");
+
+const router = express.Router();
 
 const {
     createProduct,
@@ -7,20 +9,20 @@ const {
     deleteProduct,
     findProductById,
     getProductsByCategoryId
-} = require('../controllers/api/product.controller')
+} = require("../controllers/product.controller")
+const { isAuthenticated, checkRole } = require("../middlewares/auth.middleware");
 
-const router = express.Router()
+// Route công khai (khách hàng chưa đăng nhập cũng xem được)
+router.get('/', getProducts);                    // Xem tất cả products
+router.get('/:id', findProductById);             // Xem chi tiết product
+router.get('/category/:category_id', getProductsByCategoryId); // Xem theo category
 
-router.route('/').post(createProduct);
+// router.use(isAuthenticated);
 
-router.route('/').get(getProducts);
+// // Route chỉ dành cho admin
+// router.use(checkRole(['admin']));
+router.post('/', createProduct);      // Chỉ admin tạo được
+router.put('/:id', updateProduct);    // Chỉ admin sửa được
+router.delete('/:id', deleteProduct); // Chỉ admin xóa được
 
-router.route('/:id').put(updateProduct);
-
-router.route('/:id').delete(deleteProduct);
-
-router.route('/category/:category_id').get(getProductsByCategoryId)
-
-router.route('/:id').get(findProductById);
-
-module.exports = router;
+module.exports = router

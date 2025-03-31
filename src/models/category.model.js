@@ -6,7 +6,10 @@ const categorySchema = mongoose.Schema({
         required: true,
         unique: true,
     },
-    img: {
+    description: {
+        type: String,
+    },
+    image: {
         type: String,
         required: true,
     },
